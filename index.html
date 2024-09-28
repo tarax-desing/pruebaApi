@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tendencias de Comida Sana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 0.5rem;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        #login-form {
+            max-width: 300px;
+            margin: auto;
+        }
+        #login-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #login-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tendencias de Comida Sana</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" id="home-link">Inicio</a></li>
+            <li><a href="#" id="trends-link">Tendencias</a></li>
+            <li><a href="#" id="recipes-link">Recetas</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div id="login-form">
+            <h2>Iniciar sesión</h2>
+            <form id="login">
+                <input type="text" id="username" placeholder="Usuario" required>
+                <input type="password" id="password" placeholder="Contraseña" required>
+                <button type="submit">Iniciar sesión</button>
+            </form>
+        </div>
+        <div id="content">
+            <h2>Bienvenido a las Tendencias de Comida Sana</h2>
+            <div id="trends"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            fetchTrends();
+        });
+
+        function fetchTrends() {
+            // Simulamos datos de una API
+            const trendData = [
+                { title: "Superalimentos", description: "Descubre los nuevos superalimentos que están revolucionando la nutrición." },
+                { title: "Dieta plant-based", description: "Cada vez más personas optan por una alimentación basada en plantas." },
+                { title: "Probióticos naturales", description: "Alimentos fermentados ganan popularidad por sus beneficios para la salud intestinal." }
+            ];
+            
+            const trendsDiv = document.getElementById('trends');
+            trendsDiv.innerHTML = ''; // Limpiar contenido previo
+            trendData.forEach(trend => {
+                const trendElement = document.createElement('div');
+                trendElement.innerHTML = `
+                    <h3>${trend.title}</h3>
+                    <p>${trend.description}</p>
+                `;
+                trendsDiv.appendChild(trendElement);
+            });
+        }
+
+        // Navegación simple
+        document.getElementById('home-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('trends').innerHTML = '<h2>Bienvenido a la página de inicio</h2>';
+        });
+
+        document.getElementById('trends-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            fetchTrends();
+        });
+
+        document.getElementById('recipes-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('trends').innerHTML = '<h2>Aquí irían las recetas</h2>';
+        });
+    </script>
+</body>
+</html>
